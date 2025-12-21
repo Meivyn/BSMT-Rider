@@ -10,10 +10,9 @@ import com.intellij.ide.SaveAndSyncHandler
 import com.intellij.openapi.application.EDT
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
+import com.intellij.openapi.progress.checkCanceled
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.warmup.util.yieldThroughInvokeLater
-import com.jetbrains.cidr.util.checkCanceled
 import com.jetbrains.rider.model.ReloadCommand
 import com.jetbrains.rider.model.UnloadCommand
 import com.jetbrains.rider.model.projectModelTasks

@@ -9,9 +9,9 @@ import com.intellij.openapi.application.readActionBlocking
 import com.intellij.openapi.application.writeAction
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
+import com.intellij.openapi.progress.checkCanceled
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VfsUtil
-import com.jetbrains.cidr.util.checkCanceled
 import com.jetbrains.rider.projectView.workspace.ProjectModelEntity
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
@@ -65,8 +65,8 @@ class BeatSaberProjectManager(
         val content = generateFileContent(userString)
 
 
+        checkCanceled()
         writeAction {
-            checkCanceled()
             userFile.createNewFile()
             VfsUtil.saveText(VfsUtil.findFileByIoFile(userFile, true)!!, content)
         }
@@ -79,13 +79,13 @@ class BeatSaberProjectManager(
 
         if (!file.exists()) return false
 
+        checkCanceled()
         val vfsFile = readActionBlocking {
-            checkCanceled()
             VfsUtil.findFileByIoFile(file, true)!!
         }
 
+        checkCanceled()
         val contents = readActionBlocking {
-            checkCanceled()
             VfsUtil.loadText(vfsFile)
         }
 
@@ -99,8 +99,8 @@ class BeatSaberProjectManager(
     private suspend fun updateUserFile(userCsprojFile: File, beatSaberFolder: String): Boolean {
         val file = VfsUtil.findFileByIoFile(userCsprojFile, true)!!
 
+        checkCanceled()
         val contents = readActionBlocking {
-            checkCanceled()
             VfsUtil.loadText(file)
         }
 
@@ -198,8 +198,8 @@ class BeatSaberProjectManager(
             }
         }
 
+        checkCanceled()
         writeAction {
-            checkCanceled()
             VfsUtil.saveText(file, finalString.toString())
         }
 

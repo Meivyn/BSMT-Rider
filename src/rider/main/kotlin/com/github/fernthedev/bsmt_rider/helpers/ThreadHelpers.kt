@@ -5,6 +5,15 @@ import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.progress.ProgressManager
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+
+suspend fun yieldThroughInvokeLater(): Unit = suspendCancellableCoroutine { cont ->
+    ApplicationManager.getApplication().invokeLater {
+        if (!cont.isCancelled) cont.resume(Unit)
+    }
+    cont.invokeOnCancellation { /* no-op */ }
+}
 
 // https://plugins.jetbrains.com/docs/intellij/general-threading-rules.html#read-action-cancellability
 @Deprecated("Use Kotlin coroutines")

@@ -1,18 +1,12 @@
 package com.github.fernthedev.bsmt_rider
 
-import com.github.fernthedev.bsmt_rider.settings.AppSettingsState
 import com.intellij.openapi.application.ApplicationManager
-import com.jetbrains.rd.platform.util.lifetime
-import com.jetbrains.rd.util.lifetime.Lifetime
-import com.jetbrains.rider.model.BSMT_RiderModel
-import com.jetbrains.rider.model.ConfigSettings
-import com.jetbrains.rider.protocol.ProtocolManager
 
 // TODO: This doesn't work
 private class RiderProtocolHandler {
     companion object {
-        val instance: RiderProtocolHandler
-            get() = ApplicationManager.getApplication().getService(RiderProtocolHandler::class.java)
+//        val instance: RiderProtocolHandler
+//            get() = ApplicationManager.getApplication().getService(RiderProtocolHandler::class.java)
     }
 
 
@@ -20,7 +14,7 @@ private class RiderProtocolHandler {
 
 
     init {
-        val protocol = ProtocolManager.createProtocol(ApplicationManager.getApplication(), Lifetime.Eternal)
+//        val protocol = ProtocolManager.createProtocol(ApplicationManager.getApplication(), Lifetime.Eternal)
 //        bsmtRidermodel = BSMT_RiderModel(ApplicationManager.getApplication().lifetime, protocol)
 
         ApplicationManager.getApplication().invokeLater {

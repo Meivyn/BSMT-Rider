@@ -1,10 +1,10 @@
 package com.github.fernthedev.bsmt_rider.settings
 
 import com.intellij.icons.AllIcons
+import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileChooser.FileChooser
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
-import com.intellij.ui.AnActionButton
 import com.intellij.ui.CollectionListModel
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.components.JBCheckBox
@@ -94,28 +94,27 @@ class AppSettingsComponent {
             (_beatSaberFolders.model as CollectionListModel<String>).remove(_beatSaberFolders.selectedIndex)
         }
 
-        val selectDefault = object: AnActionButton() {
-            override fun actionPerformed(p0: AnActionEvent) {
+        val selectDefault = object : AnAction(
+            "Set as default beat saber directory",
+            null,
+            AllIcons.Actions.Checked_selected
+        ) {
+            override fun actionPerformed(e: AnActionEvent) {
                 _defaultFolder.text = _beatSaberFolders.selectedValue
             }
         }
 
-
-
-        selectDefault.templatePresentation.text = "Set as default beat saber directory"
-        selectDefault.isEnabled = useDefaultFolder
-        selectDefault.templatePresentation.icon = AllIcons.Actions.Checked_selected
+        selectDefault.templatePresentation.isEnabled = useDefaultFolder
 
         _useDefaultFolder.addActionListener {
-            selectDefault.isEnabled = useDefaultFolder
+            selectDefault.templatePresentation.isEnabled = useDefaultFolder
         }
 
         _useDefaultFolder.addChangeListener {
-            selectDefault.isEnabled = useDefaultFolder
+            selectDefault.templatePresentation.isEnabled = useDefaultFolder
         }
 
         _beatSaberFoldersToolbar.addExtraAction(selectDefault)
-        _beatSaberFoldersToolbar.disableUpDownActions()
 
 
         _defaultFolder.isEditable = false
