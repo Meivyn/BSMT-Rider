@@ -9,12 +9,12 @@ dependencies {
     implementation(libs.kotlinStdLib)
     implementation(libs.rdGen)
     implementation(
-            project(
-                    mapOf(
-                            "path" to ":",
-                            "configuration" to "riderModel"
-                    )
+        project(
+            mapOf(
+                "path" to ":",
+                "configuration" to "riderModel"
             )
+        )
     )
 }
 
@@ -31,7 +31,7 @@ rdgen {
 //    generator {
 //        language = "kotlin"
 //        transform = "asis"
-//        root = "model.rider.BSMT_RiderModel"
+//        root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
 //        namespace = "com.jetbrains.rider.model"
 //        directory = "$ktOutput"
 //    }
@@ -39,7 +39,7 @@ rdgen {
 //    generator {
 //        language = "csharp"
 //        transform = "reversed"
-//        root = "model.rider.BSMT_RiderModel"
+//        root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
 //        namespace = "JetBrains.Rider.Model"
 //        directory = "$csOutput"
 //    }
